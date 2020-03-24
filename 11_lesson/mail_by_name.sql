@@ -87,7 +87,7 @@ db.shop.insert(
 		"name" : "Intel Core i3-8100",
 		"description" : "Процессор для настольных персональных компьютеров, основанных на платформе Intel.",
 		"price" : 7890.00,
-		"catalog_id" : 1,
+		"catalog_name" : "Процессоры",
 		"created_at" : "2020-03-15 11:19:33",
 		"updated_at" : "2020-03-15 11:19:33"
 	},
@@ -96,7 +96,7 @@ db.shop.insert(
 		"name" : "Intel Core i5-7400",
 		"description" : "Процессор для настольных персональных компьютеров, основанных на платформе Intel.",
 		"price" : 12700.00,
-		"catalog_id" : 1,
+		"catalog_name" : "Процессоры",
 		"created_at" : "2020-03-15 11:19:33",
 		"updated_at" : "2020-03-15 11:19:33"
 	},
@@ -105,7 +105,7 @@ db.shop.insert(
 		"name" : "AMD FX-8320E",
 		"description" : "Процессор для настольных персональных компьютеров, основанных на платформе AMD.",
 		"price" : 4780.00,
-		"catalog_id" : 1,
+		"catalog_name" : "Процессоры",
 		"created_at" : "2020-03-15 11:19:33",
 		"updated_at" : "2020-03-15 11:19:33"
 	},
@@ -114,7 +114,7 @@ db.shop.insert(
 		"name" : "AMD FX-8320",
 		"description" : "Процессор для настольных персональных компьютеров, основанных на платформе AMD.",
 		"price" : 7120.00,
-		"catalog_id" : 1,
+		"catalog_name" : "Процессоры",
 		"created_at" : "2020-03-15 11:19:33",
 		"updated_at" : "2020-03-15 11:19:33"
 	},
@@ -123,7 +123,7 @@ db.shop.insert(
 		"name" : "ASUS ROG MAXIMUS X HERO",
 		"description" : "Материнская плата ASUS ROG MAXIMUS X HERO, Z370, Socket 1151-V2, DDR4, ATX",
 		"price" : 19310.00,
-		"catalog_id" : 2,
+		"catalog_name" : "Материнские платы",
 		"created_at" : "2020-03-15 11:19:33",
 		"updated_at" : "2020-03-15 11:19:33"
 	},
@@ -132,7 +132,7 @@ db.shop.insert(
 		"name" : "Gigabyte H310M S2H",
 		"description" : "Материнская плата Gigabyte H310M S2H, H310, Socket 1151-V2, DDR4, mATX",
 		"price" : 4790.00,
-		"catalog_id" : 2,
+		"catalog_name" : "Материнские платы",
 		"created_at" : "2020-03-15 11:19:33",
 		"updated_at" : "2020-03-15 11:19:33"
 	},
@@ -141,7 +141,7 @@ db.shop.insert(
 		"name" : "MSI B250M GAMING PRO",
 		"description" : "Материнская плата MSI B250M GAMING PRO, B250, Socket 1151, DDR4, mATX",
 		"price" : 5060.00,
-		"catalog_id" : 2,
+		"catalog_name" : "Материнские платы",
 		"created_at" : "2020-03-15 11:19:33",
 		"updated_at" : "2020-03-15 11:19:33"
 	}
