@@ -143,6 +143,54 @@ CREATE TABLE comments (
     FOREIGN KEY (id) REFERENCES actions_history(id)
 );
 
+-- журнал для таблицы, влияющей на зарплату на движке archive
+DROP TABLE IF EXISTS logs;
+CREATE TABLE logs (
+	create_time DATETIME DEFAULT NOW(),
+	table_name char(40) NOT NULL,
+	emp_id BIGINT UNSIGNED NOT NULL,
+	type_id BIGINT UNSIGNED NOT NULL,
+	`condition` FLOAT NOT NULL,
+	quantity FLOAT NOT NULL,
+	created_at DATETIME
+	) ENGINE=ARCHIVE;
+
+-- триггер для журнала на событие вставки выполненной работы
+DROP TRIGGER IF EXISTS log_after_insert_catalogs;
+DELIMITER //
+
+CREATE TRIGGER log_after_insert_actions_history AFTER INSERT ON actions_history
+FOR EACH ROW
+begin
+    INSERT INTO logs
+	(table_name, emp_id, type_id, `condition`, quantity, created_at)
+	VALUES
+	('actions_history', new.emp_id, new.type_id, new.`condition`, new.quantity, new.created_at);
+END//
+
+DELIMITER ;
+
+-- представление efficiency - для контроля текущего рабочего дня, в "живой" БД "LIKE '2020-03-07%'" заменяется на CURDATE()
+CREATE OR REPLACE VIEW efficiency AS
+SELECT
+	(SELECT CONCAT(surname, ' ', name, ' ', patronymic) FROM employees WHERE emp_id=actions_history.emp_id) AS fio,
+	COUNT(id) AS `actions`,
+	ROUND(AVG(`condition`), 2) AS avg_condition
+FROM production_estimate.actions_history
+WHERE type_id>4 AND created_at LIKE '2020-03-07%'
+GROUP BY fio
+ORDER BY actions DESC;
+
+-- представление today_log - для контроля текущего рабочего дня, в "живой" БД "LIKE '2020-03-07%'" заменяется на CURDATE()
+CREATE OR REPLACE VIEW today_log AS
+SELECT
+	(SELECT CONCAT(surname, ' ', name, ' ', patronymic) FROM employees WHERE emp_id=actions_history.emp_id) AS fio,
+	(SELECT salary FROM employees WHERE emp_id=actions_history.emp_id)*`condition`*0.001 AS action_bonus,
+	(SELECT `action` FROM actions WHERE id=type_id) AS `action`,
+	`condition`,
+	created_at
+FROM production_estimate.actions_history
+WHERE created_at LIKE '2020-03-07%';
 
 -- ======================================== ЗАПОЛНЕНИЕ ДАННЫМИ ========================================
 INSERT positions(name,base_salary) VALUES
